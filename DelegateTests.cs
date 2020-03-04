@@ -34,6 +34,10 @@ namespace EventsAndDelegates
             var result = myDelegateInstance(42);
             Assert.That(result, Is.GreaterThan(0));
 
+            //You can also call it like this...if you want to.
+            result = myDelegateInstance.Invoke(42);
+            Assert.That(result, Is.GreaterThan(0));
+
             int MyLocalFunction(int someInt) => someInt + 1;
         }
 

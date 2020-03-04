@@ -11,6 +11,8 @@ namespace EventsAndDelegates
         [Test]
         public void Events_can_reference_multiple_delegate_instances()
         {
+            //Events are basically a language level implementation of the observer pattern.
+
             var myValue = 1;
 
             MyTestEvent += IncrementMyValue;
