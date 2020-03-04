@@ -7,6 +7,10 @@ namespace EventsAndDelegates
 {
     public class DelegateTests
     {
+        //Conceptually, delegates are similar to callbacks or function pointers.
+        //A delegate is a managed way to reference a piece of code, rather than a piece of data.
+        //A piece of code that receives as input or returns as output another piece of code is called a higher order function.
+
         //This is a type, like a class or interface.
         private delegate int TestDelegate(int input);
 
@@ -127,6 +131,30 @@ namespace EventsAndDelegates
             //But you can use any matching delegate instance.
             shortest = listOfWords.OrderBy(orderByDelegate).First();
             Assert.That(shortest.Length, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Delegate_instances_are_multicast_delegates()
+        {
+            var startValue = 42;
+            Action delegateInstance;
+            Action inc = Increment;
+            Action dec = Decrement;
+
+            delegateInstance = inc + dec;
+            inc();
+            Assert.That(startValue, Is.EqualTo(43));
+            dec();
+            
+            delegateInstance();
+            Assert.That(startValue, Is.EqualTo(42));
+
+            delegateInstance += inc;
+            delegateInstance();
+            Assert.That(startValue, Is.EqualTo(43));
+
+            void Increment() => startValue++;
+            void Decrement() => startValue--;
         }
 
         class TestClass

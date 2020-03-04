@@ -5,6 +5,8 @@ namespace EventsAndDelegates
 {
     public class EventTests
     {
+        //Events were used extensively in the early days of .NET when there was a lot of event-driven, UI-based desktop software. They are less common with web development.
+
         //Events must be of a delegate type.
         private event Action MyTestEvent;
 
@@ -57,6 +59,7 @@ namespace EventsAndDelegates
         {
             Assert.Throws<NullReferenceException>(() => MyTestEvent.Invoke());
 
+            //You can Elvis operator your way to glory to help avoid exceptions.
             Assert.DoesNotThrow(() => MyTestEvent?.Invoke());
 
             MyTestEvent += DummyAction;
