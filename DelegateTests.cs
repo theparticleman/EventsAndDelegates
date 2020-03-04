@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace EventsAndDelegates
@@ -59,6 +61,8 @@ namespace EventsAndDelegates
         [Test]
         public void Special_types_of_delegates()
         {
+            //Actions and Funcs and Predicates. Oh my!
+
             Action<int> actionDelegate = ActionFunction;
             Assert.That(actionDelegate, Is.Not.Null);
 
@@ -78,14 +82,16 @@ namespace EventsAndDelegates
         {
             var instance = new TestClass();
             TestDelegate instanceMethodDelegate = instance.InstanceMethod;
+
             //This won't work because we can't do anything with a reference to an instance method without an instance of the class.
             //TestDelegate instanceMethodDelegate = TestClass.InstanceMethod;
+
             Assert.That(instanceMethodDelegate, Is.Not.Null);
 
             TestDelegate staticMethodDelegate = TestClass.StaticMethod;
             Assert.That(staticMethodDelegate, Is.Not.Null);
 
-            TestDelegate anonymousMethodDelegate = delegate(int x)
+            TestDelegate anonymousMethodDelegate = delegate (int x)
             {
                 return x + 1;
             };
@@ -93,6 +99,34 @@ namespace EventsAndDelegates
 
             TestDelegate lambdaDelegate = x => x + 42;
             Assert.That(lambdaDelegate, Is.Not.Null);
+        }
+
+        [Test]
+        public void Linq_is_built_on_delegates()
+        {
+            var listOfWords = new List<string>{
+                "This",
+                "is",
+                "a",
+                "sample",
+                "list",
+                "of",
+                "words"
+            };
+
+            //We usually see LINQ methods with lambda delegates.
+            var shortest = listOfWords.OrderBy(x => x.Length).First();
+            Assert.That(shortest.Length, Is.EqualTo(1));
+
+
+            Func<string, int> orderByDelegate = delegate (string input)
+            {
+                return input.Length;
+            };
+
+            //But you can use any matching delegate instance.
+            shortest = listOfWords.OrderBy(orderByDelegate).First();
+            Assert.That(shortest.Length, Is.EqualTo(1));
         }
 
         class TestClass
