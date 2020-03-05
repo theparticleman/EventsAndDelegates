@@ -7,6 +7,8 @@ namespace EventsAndDelegates
 {
     public class DelegateTests
     {
+        //Code can be found at https://github.com/theparticleman/EventsAndDelegates
+
         //Conceptually, delegates are similar to callbacks or function pointers.
         //A delegate is a managed way to reference a piece of code, rather than a piece of data.
         //A piece of code that receives as input or returns as output another piece of code is called a higher order function.
