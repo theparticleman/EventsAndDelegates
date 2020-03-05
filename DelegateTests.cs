@@ -11,6 +11,7 @@ namespace EventsAndDelegates
 
         //Conceptually, delegates are similar to callbacks or function pointers.
         //A delegate is a managed way to reference a piece of code, rather than a piece of data.
+        //Programming languages that can treat variables that reference code just like any other kind of variable are said to have first-class functions.
         //A piece of code that receives as input or returns as output another piece of code is called a higher order function.
 
         //This is a type, like a class or interface.
