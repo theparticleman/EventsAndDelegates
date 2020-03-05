@@ -46,7 +46,7 @@ namespace EventsAndDelegates
             var obj = new ClassWithEvent();
             obj.MyEvent += () => myValue++;
 
-            //The event can only be published inside the scope where it is owned
+            //The event can only be published (or invoked) inside the scope where it is owned
             // obj.MyEvent();
 
             obj.PublishMyEvent();
