@@ -55,6 +55,18 @@ namespace EventsAndDelegates
         }
 
         [Test]
+        public void Public_delegate_can_be_invoked()
+        {
+            var myValue = 1;
+            var obj = new ClassWithEvent();
+            obj.MyDelegateInstance += () => myValue++;
+
+            obj.MyDelegateInstance();
+
+            Assert.That(myValue, Is.EqualTo(2));
+        }
+
+        [Test]
         public void Invoking_an_event_when_there_are_no_subscribers_results_in_an_error()
         {
             Assert.Throws<NullReferenceException>(() => MyTestEvent.Invoke());
